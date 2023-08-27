@@ -16,7 +16,7 @@ enum Status {
 }
 
 class APIRequest: Fetchable {
-    func fetchData<T>(url: String, model: T.Type, completion: @escaping (T?, Bool, Status) -> Void) where T : Decodable {
+    public func fetchData<T>(url: String, model: T.Type, completion: @escaping (T?, Bool, Status) -> Void) where T : Decodable {
         var requestStatus: Status = .idle
         
         AF.request(url, method: .get, encoding: URLEncoding.default).response { response in
@@ -37,9 +37,5 @@ class APIRequest: Fetchable {
                 completion(nil, true, requestStatus)
             }
         }
-    }
-    
-    func fetchDataAsync() async throws {
-        
     }
 }

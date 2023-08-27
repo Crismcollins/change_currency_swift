@@ -38,5 +38,11 @@ class FetchViewModel: ObservableObject {
             completion(result, finished, status)
         }
     }
-
+    
+    public func fetchDataAsync<T: Decodable>(currency: String, model: T.Type) async throws -> T {
+        let url = URL(string: self.findURL(currency: currency))!
+        let (data, _) = try! await URLSession.shared.data(from: url)
+        let dataModel = try! JSONDecoder().decode(model.self, from: data)
+        return dataModel
+    }
 }

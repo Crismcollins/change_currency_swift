@@ -77,6 +77,9 @@ struct DetailView: View {
         .onAppear {
             viewModel.setCurrency(currency: currency)
             viewModel.fetchData(currency: currency)
+            Task {
+                await viewModel.fetchDataAsync(currency: currency)
+            }
         }
     }
 }

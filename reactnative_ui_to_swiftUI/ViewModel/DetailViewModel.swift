@@ -69,4 +69,10 @@ class DetailViewModel: ObservableObject {
             
         }
     }
+    
+    public func fetchDataAsync(currency: String) async {
+        let dataAsync = try! await fetchViewModel.fetchDataAsync(currency: currency, model: CurrencyList.self)
+        let specificData = dataAsync.currency.map { $0.Valor }
+        print(specificData)
+    }
 }
